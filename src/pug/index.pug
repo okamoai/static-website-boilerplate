@@ -1,0 +1,43 @@
+extends /_layout/default
+
+block head_custom
+  link(rel="stylesheet" href="/resources/css/app.css")
+
+block foot_custom
+  script(src="/resources/js/app.js")
+
+block content
+  h1.c-heading.-pageTitle
+    span.c-heading_text Page Title
+  p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc erat, tristique a leo eu, tristique dignissim sapien. Etiam ullamcorper nibh in ultricies pretium. Sed laoreet, nibh id posuere convallis, ex sapien placerat orci, id ornare orci ex sed ipsum. Sed vitae libero a tortor sagittis blandit a non turpis. Proin dapibus tempor ante, bibendum venenatis quam congue id. Pellentesque diam quam, luctus ac erat et, scelerisque posuere orci. Quisque non bibendum tortor. Duis aliquet facilisis ante vel sodales. Morbi ac nunc eget eros suscipit venenatis sit amet a est. Etiam feugiat varius vestibulum. Phasellus sollicitudin condimentum enim eu ultrices. Maecenas efficitur mi vitae lectus fermentum, rutrum cursus ex auctor. Donec tempus iaculis mi eget congue. Donec varius placerat tortor, vitae fermentum magna mattis nec
+
+  section.c-section
+    h2.c-heading
+      span.c-heading_text Image
+    figure.c-figure
+      img(src='/resources/img/moai.jpg', alt='Moai')
+
+  section.c-section
+    h2.c-heading
+      span.c-heading_text Web Font Icon
+    p
+      span.c-webfont-icon.-arrowUp
+      span.c-webfont-icon.-arrowRight
+      span.c-webfont-icon.-arrowDown
+      span.c-webfont-icon.-arrowLeft
+    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc erat, tristique a leo eu, tristique dignissim sapien. Etiam ullamcorper nibh in ultricies pretium. Sed laoreet, nibh id posuere convallis, ex sapien placerat orci, id ornare orci ex sed ipsum. Sed vitae libero a tortor sagittis blandit a non turpis. Proin dapibus tempor ante, bibendum venenatis quam congue id. Pellentesque diam quam, luctus ac erat et, scelerisque posuere orci. Quisque non bibendum tortor. Duis aliquet facilisis ante vel sodales. Morbi ac nunc eget eros suscipit venenatis sit amet a est. Etiam feugiat varius vestibulum. Phasellus sollicitudin condimentum enim eu ultrices.
+
+  section.c-section
+    h2.c-heading
+      span.c-heading_text CSS Sprite Icon
+    p
+      span.c-sprite-icon.-heart
+      span.c-sprite-icon.-star
+    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed nunc erat, tristique a leo eu, tristique dignissim sapien. Etiam ullamcorper nibh in ultricies pretium. Sed laoreet, nibh id posuere convallis, ex sapien placerat orci, id ornare orci ex sed ipsum. Sed vitae libero a tortor sagittis blandit a non turpis. Proin dapibus tempor ante, bibendum venenatis quam congue id. Pellentesque diam quam, luctus ac erat et, scelerisque posuere orci. Quisque non bibendum tortor. Duis aliquet facilisis ante vel sodales. Morbi ac nunc eget eros suscipit venenatis sit amet a est. Etiam feugiat varius vestibulum. Phasellus sollicitudin condimentum enim eu ultrices.
+
+  section.c-section
+    h2.c-heading
+      span.c-heading_text Ajax
+    div
+      button#getUser.c-button(type='button') Get randomuser.me
+    section.c-section#resultUser

@@ -1,0 +1,16 @@
+include /_setting/init
+doctype html
+html
+  head
+    include /_partial/meta
+    block head_custom
+  body
+    .l-page
+      include /_partial/header
+      .l-contents
+        .l-contents_inner
+          include /_partial/nav
+          main.l-main
+            block content
+      include /_partial/footer
+    block foot_custom

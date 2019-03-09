@@ -1,0 +1,98 @@
+{
+  "name": "static-website-boilerplate",
+  "version": "1.0.0",
+  "description": "Boilerplate of static website",
+  "main": "index.js",
+  "scripts": {
+    "clean": "node ./build/clean",
+    "build:copy": "node ./build/copy",
+    "build:img": "node ./build/img",
+    "build:css": "node ./build/css",
+    "build:js": "node ./build/js",
+    "build:html": "node ./build/html",
+    "build": "node ./build/all",
+    "watch:copy": "node ./build/copy/watch",
+    "watch:img": "node ./build/img/watch",
+    "watch:js": "node ./build/js/watch",
+    "watch:css": "node ./build/css/watch",
+    "watch:html": "node ./build/html/watch",
+    "watch": "node ./build/all/watch",
+    "server": "browser-sync start --config ./bs-config.js",
+    "start": "npm-run-all -s clean build -p server watch"
+  },
+  "engines": {
+    "node": "^10.14.1",
+    "npm": "^6.4.1"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier-eslint --write",
+      "eslint",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/okamoai/static-website-boilerplate.git"
+  },
+  "author": "okamoai <okamoai@rano-raraku.net>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/okamoai/static-website-boilerplate/issues"
+  },
+  "homepage": "https://github.com/okamoai/static-website-boilerplate#readme",
+  "dependencies": {
+    "@babel/runtime": "^7.2.0",
+    "axios": "^0.18.0",
+    "chokidar": "^2.0.4",
+    "colors": "^1.3.2",
+    "cpx": "^1.5.0",
+    "css-mqpacker": "^7.0.0",
+    "cssnano": "^4.1.8",
+    "emitty": "^1.4.0",
+    "es6-promise": "^4.2.6",
+    "glob": "^7.1.3",
+    "imagemin": "^6.0.0",
+    "imagemin-gifsicle": "^6.0.1",
+    "imagemin-jpegtran": "^6.0.0",
+    "imagemin-pngquant": "^6.0.0",
+    "imagemin-svgo": "^7.0.0",
+    "lodash-es": "^4.17.11",
+    "mkdirp": "^0.5.1",
+    "postcss": "^7.0.7",
+    "postcss-easings": "^2.0.0",
+    "postcss-lazysprite": "^2.1.4",
+    "postcss-load-config": "^2.0.0",
+    "postcss-preset-env": "^6.5.0",
+    "postcss-sorting": "^4.0.1",
+    "postcss-webfont": "git+https://github.com/okamoai/postcss-webfont.git",
+    "pug": "^2.0.3",
+    "ress": "^1.2.2",
+    "rimraf": "^2.6.2",
+    "stylus": "^0.54.5",
+    "webpack": "^4.28.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "^7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "^7.2.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
+    "@babel/preset-env": "^7.2.3",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.4",
+    "browser-sync": "^2.26.3",
+    "eslint": "^5.10.0",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "husky": "^1.2.0",
+    "lint-staged": "^8.1.0",
+    "npm-run-all": "^4.1.5",
+    "prettier-eslint-cli": "^4.7.1"
+  }
+}
