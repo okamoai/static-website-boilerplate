@@ -17,10 +17,10 @@ Website bolierplate for HTML/CSS/JS/WebFont/CSSSprite.
 
 ## Requirements
 
-Paddington requires the following to run:
+Requires the following to run:
 
-- [Node.js][node] 10.14+
-- [npm][npm] (normally comes with Node.js)
+- node 10.14+
+- npm 6.4+
 
 I checked the operation with Windows 10 / MacOS 10.12.
 
