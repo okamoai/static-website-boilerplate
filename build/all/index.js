@@ -1,4 +1,3 @@
-/* eslint no-console: ["error", { allow: ["error"] }] */
 const clean = require('../clean/main')
 const copy = require('../copy/main')
 const html = require('../html/main')
