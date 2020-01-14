@@ -19,8 +19,8 @@ Website bolierplate for HTML/CSS/JS/WebFont/CSSSprite.
 
 Requires the following to run:
 
-- node 10.14+
-- npm 6.4+
+- node 12.14+
+- npm 6.13+
 
 I checked the operation with Windows 10 / MacOS 10.12.
 

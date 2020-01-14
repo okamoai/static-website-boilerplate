@@ -21,8 +21,8 @@
     "start": "npm-run-all -s clean build -p server watch"
   },
   "engines": {
-    "node": "^10.14.1",
-    "npm": "^6.4.1"
+    "node": "^12.14.1",
+    "npm": "^6.13.4"
   },
   "lint-staged": {
     "*.js": [
