@@ -4,9 +4,7 @@ const chokidar = require('chokidar')
 const pug = require('pug')
 const emitty = require('emitty')
 const { rootPath, html: config } = require('../config')
-const {
-  toGlobPattern, readPath, writeFile, mkdir,
-} = require('../utils')
+const { toGlobPattern, readPath, writeFile, mkdir } = require('../utils')
 
 function compilePug(file) {
   const html = pug.renderFile(file, {

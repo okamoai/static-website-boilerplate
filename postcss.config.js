@@ -35,10 +35,10 @@ module.exports = ctx => ({
       ctx.env === 'development'
         ? false
         : {
-          minifyFontValues: { removeQuotes: false },
-          discardUnused: { fontFace: false },
-          zindex: false,
-          reduceIdents: false,
-        },
+            minifyFontValues: { removeQuotes: false },
+            discardUnused: { fontFace: false },
+            zindex: false,
+            reduceIdents: false,
+          },
   },
 })

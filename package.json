@@ -89,6 +89,7 @@
     "browser-sync": "^2.26.5",
     "eslint": "^5.10.0",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-prettier": "^6.9.0",
     "eslint-plugin-import": "^2.14.0",
     "husky": "^1.2.0",
     "lint-staged": "^8.1.0",

@@ -6,9 +6,7 @@ const postcss = require('postcss')
 const postcssrc = require('postcss-load-config')
 const emitty = require('emitty')
 const { rootPath, css: config } = require('../config')
-const {
-  toGlobPattern, readPath, mkdir, readFile, writeFile,
-} = require('../utils')
+const { toGlobPattern, readPath, mkdir, readFile, writeFile } = require('../utils')
 
 process.env.NODE_ENV = process.argv[2] || 'development'
 const isDevelopment = process.env.NODE_ENV === 'development'
@@ -81,7 +79,11 @@ async function watch(input) {
         const dependencyOutput = targetPath => {
           const filePath = targetPath.replace(/\\/g, '/') // for Windows
           Object.keys(storage)
-            .filter(key => storage[key].dependencies.some(dep => new RegExp(dep.replace('*', '.+?')).test(filePath)))
+            .filter(key =>
+              storage[key].dependencies.some(dep =>
+                new RegExp(dep.replace('*', '.+?')).test(filePath)
+              )
+            )
             .forEach(key => {
               if (new RegExp('/_').test(key) === false) {
                 outputCss(path.join(rootPath, key)).catch(err => reject(err))

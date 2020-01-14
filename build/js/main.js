@@ -90,7 +90,7 @@ async function watch() {
         ignored: /node_modules/,
       },
     },
-    () => {},
+    () => {}
   )
 }
 module.exports = async (opt = { watch: false }) => {
