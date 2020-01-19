@@ -35,7 +35,7 @@ module.exports = {
     plugins: {
       gif: {},
       jpg: {},
-      png: { quality: '65-80' },
+      png: { quality: [0.65, 0.8] },
       svg: {
         plugins: [
           { removeRasterImages: true },

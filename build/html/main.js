@@ -25,42 +25,49 @@ async function outputHtml(file) {
     await writeFile(output, html)
     console.log(colors.green(' compile pug file: ') + path.relative(rootPath, output))
   } catch (err) {
+    console.error(err)
     throw err
   }
 }
 
 async function watch(input) {
   console.log(colors.cyan('"Watch:html": watching files ...'))
-  return new Promise(async (_, reject) => {
-    const emittyPug = emitty.setup(config.inputDir, 'pug', { basedir: config.inputDir })
-    await emittyPug.scan().catch(err => reject(err))
-    const chokidarInput = input.replace(/\\/g, '/') // for Windows
-    const watcher = chokidar.watch(chokidarInput, {
-      ignoreInitial: true,
-    })
-    watcher.on('all', async (event, file) => {
-      if (event === 'add' || event === 'unlink') {
-        await emittyPug.scan().catch(err => reject(err))
+  const emittyPug = emitty.setup(config.inputDir, 'pug', { basedir: config.inputDir })
+  await emittyPug.scan().catch(err => {
+    throw new Error(err)
+  })
+  const chokidarInput = input.replace(/\\/g, '/') // for Windows
+  const watcher = chokidar.watch(chokidarInput, {
+    ignoreInitial: true,
+  })
+  watcher.on('all', async (event, file) => {
+    if (event === 'add' || event === 'unlink') {
+      await emittyPug.scan().catch(err => {
+        throw new Error(err)
+      })
+    }
+    if (new RegExp(`${path.sep}_`).test(file) === false) {
+      outputHtml(file).catch(err => {
+        throw new Error(err)
+      })
+    } else {
+      const storage = emittyPug.storage()
+      const dependencyOutput = targetPath => {
+        const filePath = targetPath.replace(/\\/g, '/') // for Windows
+        Object.keys(storage)
+          .filter(key => storage[key].dependencies.includes(filePath))
+          .forEach(async key => {
+            if (new RegExp('/_').test(key) === false) {
+              outputHtml(path.join(rootPath, key)).catch(err => {
+                throw new Error(err)
+              })
+            } else {
+              dependencyOutput(path.join(rootPath, key))
+            }
+          })
       }
-      if (new RegExp(`${path.sep}_`).test(file) === false) {
-        outputHtml(file).catch(err => reject(err))
-      } else {
-        const storage = emittyPug.storage()
-        const dependencyOutput = targetPath => {
-          const filePath = targetPath.replace(/\\/g, '/') // for Windows
-          Object.keys(storage)
-            .filter(key => storage[key].dependencies.includes(filePath))
-            .forEach(async key => {
-              if (new RegExp('/_').test(key) === false) {
-                outputHtml(path.join(rootPath, key)).catch(err => reject(err))
-              } else {
-                dependencyOutput(path.join(rootPath, key))
-              }
-            })
-        }
-        dependencyOutput(file)
-      }
-    })
+      dependencyOutput(file)
+    }
   })
 }
 
@@ -73,6 +80,7 @@ async function build(input) {
       .map(file => outputHtml(file))
     return Promise.all(taskAll)
   } catch (err) {
+    console.error(err)
     throw err
   }
 }
@@ -87,6 +95,7 @@ module.exports = async (opt = { watch: false }) => {
       await build(input)
     }
   } catch (err) {
+    console.error(err)
     throw err
   }
 }

@@ -12,7 +12,8 @@ const { toGlobPattern, readPath } = require('../utils')
 function outputImage(filePath) {
   const relativePath = path.relative(config.inputDir, filePath)
   const output = path.join(config.outputDir, relativePath)
-  return imagemin([filePath], path.dirname(output), {
+  return imagemin([filePath.replace(/\\/g, '/')], {
+    destination: path.dirname(output),
     plugins: [
       imageminGifsicle(config.plugins.gif),
       imageminJpegtran(config.plugins.jpg),
@@ -21,7 +22,9 @@ function outputImage(filePath) {
     ],
   }).then(files => {
     files.forEach(file => {
-      console.log(colors.green(' minify image file: ') + path.relative(rootPath, file.path))
+      console.log(
+        colors.green(' minify image file: ') + path.relative(rootPath, file.destinationPath)
+      )
     })
   })
 }

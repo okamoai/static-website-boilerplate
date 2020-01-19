@@ -101,6 +101,7 @@ module.exports = async (opt = { watch: false }) => {
       await build()
     }
   } catch (err) {
+    console.error(err)
     throw err
   }
 }

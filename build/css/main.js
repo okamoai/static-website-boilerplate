@@ -55,46 +55,51 @@ async function outputCss(file) {
     await writeFile(output, css)
     console.log(colors.green(' compile stylus file: ') + path.relative(rootPath, output))
   } catch (err) {
+    console.error(err)
     throw err
   }
 }
 
 async function watch(input) {
   console.log(colors.cyan('"Watch:css": watching files ...'))
-  return new Promise(async (_, reject) => {
-    const emittyStylus = emitty.setup(config.inputDir, 'stylus', { basedir: config.inputDir })
-    await emittyStylus.scan()
-    const chokidarInput = input.replace(/\\/g, '/') // for Windows
-    const watcher = chokidar.watch(chokidarInput, {
-      ignoreInitial: true,
-    })
-    watcher.on('all', async (event, file) => {
-      if (event === 'add' || event === 'unlink') {
-        await emittyStylus.scan().catch(err => reject(err))
-      }
-      if (new RegExp(`${path.sep}_`).test(file) === false) {
-        outputCss(file).catch(err => reject(err))
-      } else {
-        const storage = emittyStylus.storage()
-        const dependencyOutput = targetPath => {
-          const filePath = targetPath.replace(/\\/g, '/') // for Windows
-          Object.keys(storage)
-            .filter(key =>
-              storage[key].dependencies.some(dep =>
-                new RegExp(dep.replace('*', '.+?')).test(filePath)
-              )
+  const emittyStylus = emitty.setup(config.inputDir, 'stylus', { basedir: config.inputDir })
+  await emittyStylus.scan()
+  const chokidarInput = input.replace(/\\/g, '/') // for Windows
+  const watcher = chokidar.watch(chokidarInput, {
+    ignoreInitial: true,
+  })
+  watcher.on('all', async (event, file) => {
+    if (event === 'add' || event === 'unlink') {
+      await emittyStylus.scan().catch(err => {
+        throw new Error(err)
+      })
+    }
+    if (new RegExp(`${path.sep}_`).test(file) === false) {
+      outputCss(file).catch(err => {
+        throw new Error(err)
+      })
+    } else {
+      const storage = emittyStylus.storage()
+      const dependencyOutput = targetPath => {
+        const filePath = targetPath.replace(/\\/g, '/') // for Windows
+        Object.keys(storage)
+          .filter(key =>
+            storage[key].dependencies.some(dep =>
+              new RegExp(dep.replace('*', '.+?')).test(filePath)
             )
-            .forEach(key => {
-              if (new RegExp('/_').test(key) === false) {
-                outputCss(path.join(rootPath, key)).catch(err => reject(err))
-              } else {
-                dependencyOutput(path.join(rootPath, key))
-              }
-            })
-        }
-        dependencyOutput(file)
+          )
+          .forEach(key => {
+            if (new RegExp('/_').test(key) === false) {
+              outputCss(path.join(rootPath, key)).catch(err => {
+                throw new Error(err)
+              })
+            } else {
+              dependencyOutput(path.join(rootPath, key))
+            }
+          })
       }
-    })
+      dependencyOutput(file)
+    }
   })
 }
 
@@ -107,6 +112,7 @@ async function build(input) {
       .map(file => outputCss(file))
     return Promise.all(taskAll)
   } catch (err) {
+    console.error(err)
     throw err
   }
 }
@@ -121,6 +127,7 @@ module.exports = async (opt = { watch: false }) => {
       await build(input)
     }
   } catch (err) {
+    console.error(err)
     throw err
   }
 }

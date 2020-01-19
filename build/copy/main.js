@@ -48,6 +48,7 @@ module.exports = async (opt = { watch: false }) => {
       await build(input)
     }
   } catch (err) {
+    console.error(err)
     throw err
   }
 }
