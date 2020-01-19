@@ -5,13 +5,22 @@ module.exports = {
       {
         modules: false,
         useBuiltIns: 'usage',
+        corejs: {
+          version: 3,
+          proposals: true,
+        },
       },
     ],
   ],
   plugins: [
-    '@babel/plugin-transform-runtime',
-    ['@babel/plugin-proposal-optional-chaining', { loose: false }],
-    ['@babel/plugin-proposal-pipeline-operator', { proposal: 'minimal' }],
-    ['@babel/plugin-proposal-nullish-coalescing-operator', { loose: false }],
+    [
+      '@babel/plugin-transform-runtime',
+      {
+        corejs: {
+          version: 3,
+          proposals: true,
+        },
+      },
+    ],
   ],
 }
