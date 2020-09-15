@@ -55,14 +55,6 @@ module.exports = {
   },
   mkdir(file) {
     const dir = path.dirname(file)
-    return new Promise((resolve, reject) => {
-      mkdirp(dir, err => {
-        if (err) {
-          reject(new Error(err))
-          return
-        }
-        resolve()
-      })
-    })
+    return mkdirp(dir)
   },
 }
