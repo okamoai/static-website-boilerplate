@@ -73,7 +73,7 @@
     "postcss-preset-env": "^6.7.0",
     "postcss-sorting": "^5.0.1",
     "postcss-webfont": "git+https://github.com/okamoai/postcss-webfont.git",
-    "pug": "^3.0.0",
+    "pug": "^3.0.1",
     "ress": "^3.0.0",
     "rimraf": "^3.0.2",
     "stylus": "^0.54.8",
