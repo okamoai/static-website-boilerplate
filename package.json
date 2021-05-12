@@ -66,7 +66,7 @@
     "imagemin-svgo": "^8.0.0",
     "lodash-es": "^4.17.15",
     "mkdirp": "^1.0.4",
-    "postcss": "^7.0.32",
+    "postcss": "^8.2.10",
     "postcss-easings": "^2.0.0",
     "postcss-lazysprite": "git+https://github.com/okamoai/postcss-lazysprite.git",
     "postcss-load-config": "^2.1.0",
